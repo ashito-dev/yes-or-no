@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>yes or no question ?? 💗</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fff5fa 0%, #ffeef5 100%);
+            font-family: 'Segoe UI', 'Quicksand', -apple-system, BlinkMacSystemFont, 'Poppins', 'Inter', system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        /* main card — soft, dreamy, girly aesthetic */
+        .card {
+            background: rgba(255, 252, 254, 0.94);
+            backdrop-filter: blur(12px);
+            border-radius: 3.5rem;
+            padding: 2.2rem 1.8rem;
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            box-shadow: 0 30px 50px rgba(245, 120, 160, 0.2), 0 8px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(255, 235, 245, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            font-weight: 620;
+            background: linear-gradient(135deg, #e86f9c, #f5a3c7);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .sub {
+            font-size: 0.95rem;
+            color: #cf7a9c;
+            background: #fff0f7;
+            display: inline-block;
+            padding: 0.35rem 1.3rem;
+            border-radius: 60px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        /* button container */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 1.8rem 0 1.5rem;
+            position: relative;
+            min-height: 130px;
+        }
+
+        /* base button style */
+        .btn {
+            border: none;
+            font-weight: 620;
+            border-radius: 100px;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 0.3px;
+            transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+            touch-action: manipulation;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* YES button — starts normal, grows when NO is clicked */
+        .btn-yes {
+            background: #ffd0dc;
+            color: #a54266;
+            border: 1px solid #ffeef5;
+            box-shadow: 0 10px 22px rgba(233, 110, 140, 0.3);
+            font-size: 1.6rem;
+            padding: 0.9rem 2rem;
+            min-width: 140px;
+            will-change: transform, font-size, padding;
+        }
+
+        /* dynamic size classes — Yes grows beautifully */
+        .btn-yes.size-1 {
+            font-size: 1.8rem;
+            padding: 1rem 2.2rem;
+            min-width: 160px;
+        }
+        .btn-yes.size-2 {
+            font-size: 2rem;
+            padding: 1.15rem 2.5rem;
+            min-width: 180px;
+        }
+        .btn-yes.size-3 {
+            font-size: 2.2rem;
+            padding: 1.3rem 2.8rem;
+            min-width: 200px;
+        }
+        .btn-yes.size-4 {
+            font-size: 2.5rem;
+            padding: 1.5rem 3.2rem;
+            min-width: 230px;
+        }
+        .btn-yes.size-5 {
+            font-size: 2.8rem;
+            padding: 1.7rem 3.6rem;
+            min-width: 260px;
+        }
+        .btn-yes.size-6 {
+            font-size: 3.1rem;
+            padding: 1.9rem 4rem;
+            min-width: 300px;
+        }
+        .btn-yes.size-7 {
+            font-size: 3.4rem;
+            padding: 2.1rem 4.4rem;
+            min-width: 330px;
+        }
+        .btn-yes.size-max {
+            font-size: 3.7rem;
+            padding: 2.3rem 4.8rem;
+            min-width: 360px;
+        }
+
+        /* NO button — stays in place, no running away */
+        .btn-no {
+            background: #f0e3ea;
+            color: #9a6f83;
+            border: 1px solid #fbeef6;
+            font-size: 1.6rem;
+            padding: 0.9rem 2rem;
+            min-width: 140px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-no:hover {
+            background: #e8d7e2;
+            transform: scale(0.98);
+        }
+
+        .btn-no:active {
+            transform: scale(0.96);
+        }
+
+        /* message area for try again texts and final sweet message */
+        .message-area {
+            margin-top: 1.8rem;
+            min-height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        /* try again message style */
+        .try-message {
+            background: rgba(255, 240, 245, 0.9);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #c65d83;
+            backdrop-filter: blur(8px);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: fadeSlideUp 0.3s ease-out;
+            box-shadow: 0 4px 12px rgba(200, 100, 130, 0.1);
+            border: 1px solid #ffe2ef;
+        }
+
+        /* sweet final message */
+        .sweet-message {
+            background: rgba(255, 245, 250, 0.96);
+            padding: 1rem 2rem;
+            border-radius: 80px;
+            backdrop-filter: blur(12px);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #bc4e74;
+            box-shadow: 0 15px 30px rgba(245, 120, 160, 0.25);
+            border: 1px solid #ffdae8;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+
+        .sweet-message.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* pop animation for yes button when grows */
+        @keyframes gentlePop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); box-shadow: 0 18px 30px rgba(233, 100, 140, 0.4); }
+            100% { transform: scale(1); }
+        }
+
+        .grow-pop {
+            animation: gentlePop 0.25s ease-out;
+        }
+
+        /* final celebration pop */
+        @keyframes celebratePop {
+            0% { transform: scale(0.95); opacity: 0; }
+            70% { transform: scale(1.08); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .final-celebrate {
+            animation: celebratePop 0.5s cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+        }
+
+        .footer-whisper {
+            margin-top: 1.8rem;
+            font-size: 0.7rem;
+            color: #e0a5bd;
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        /* responsive for mobile */
+        @media (max-width: 550px) {
+            .card {
+                padding: 1.6rem 1.2rem;
+                border-radius: 2.5rem;
+            }
+            .btn-yes, .btn-no {
+                font-size: 1.3rem;
+                padding: 0.7rem 1.3rem;
+                min-width: 115px;
+            }
+            /* scaled growth for mobile */
+            .btn-yes.size-1 { font-size: 1.5rem; padding: 0.85rem 1.6rem; min-width: 130px; }
+            .btn-yes.size-2 { font-size: 1.7rem; padding: 1rem 1.9rem; min-width: 145px; }
+            .btn-yes.size-3 { font-size: 1.9rem; padding: 1.15rem 2.2rem; min-width: 165px; }
+            .btn-yes.size-4 { font-size: 2.1rem; padding: 1.3rem 2.5rem; min-width: 185px; }
+            .btn-yes.size-5 { font-size: 2.3rem; padding: 1.5rem 2.8rem; min-width: 205px; }
+            .btn-yes.size-6 { font-size: 2.5rem; padding: 1.7rem 3.1rem; min-width: 225px; }
+            .btn-yes.size-7 { font-size: 2.7rem; padding: 1.9rem 3.4rem; min-width: 245px; }
+            .btn-yes.size-max { font-size: 2.9rem; padding: 2.1rem 3.7rem; min-width: 265px; }
+            .sweet-message { font-size: 1.3rem; padding: 0.7rem 1.5rem; }
+            .try-message { font-size: 0.95rem; padding: 0.5rem 1.2rem; }
+            h1 { font-size: 1.8rem; }
+        }
+
+        /* cute extra flair */
+        .heart-bg {
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.03;
+            pointer-events: none;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>🌸 a little question 🌸</h1>
+    <div class="sub">will you be my sunshine?</div>
+
+    <div class="button-group">
+        <button class="btn btn-yes" id="yesButton">Yes 💖</button>
+        <button class="btn btn-no" id="noButton">No ⋆˚✿</button>
+    </div>
+
+    <div class="message-area" id="messageArea">
+        <!-- dynamic messages appear here: try again texts or final yay -->
+    </div>
+    <div class="footer-whisper">✨ click "No" and watch the magic ✨</div>
+</div>
+
+<script>
+    (function() {
+        // DOM elements
+        const yesBtn = document.getElementById('yesButton');
+        const noBtn = document.getElementById('noButton');
+        const messageArea = document.getElementById('messageArea');
+        
+        // Growth tracking for Yes button
+        let noClickCount = 0;          // how many times No has been clicked
+        const maxGrowthLevels = 8;      // total growth steps (0 to 7, then max)
+        
+        // Array of sweet "try again" messages
+        const tryAgainMessages = [
+            "💕 try again... pretty please? 💕",
+            "🌷 not yet... come on, say yes! 🌷",
+            "🍰 hmm... maybe next time? say yes! 🍰",
+            "✨ one more try? yes is waiting ✨",
+            "🎀 awww... but yes is getting bigger! 🎀",
+            "🌸 don't give up... yes loves you! 🌸",
+            "💗 just click yes already! 💗",
+            "🍬 keep going... yes grows with love 🍬",
+            "🌟 every 'no' makes yes stronger 🌟",
+            "💖 you're so close... say yes! 💖"
+        ];
+        
+        // Function to update Yes button size based on noClickCount
+        function updateYesButtonSize() {
+            // remove all size classes
+            yesBtn.classList.remove('size-1', 'size-2', 'size-3', 'size-4', 'size-5', 'size-6', 'size-7', 'size-max');
+            
+            if (noClickCount === 1) {
+                yesBtn.classList.add('size-1');
+            } else if (noClickCount === 2) {
+                yesBtn.classList.add('size-2');
+            } else if (noClickCount === 3) {
+                yesBtn.classList.add('size-3');
+            } else if (noClickCount === 4) {
+                yesBtn.classList.add('size-4');
+            } else if (noClickCount === 5) {
+                yesBtn.classList.add('size-5');
+            } else if (noClickCount === 6) {
+                yesBtn.classList.add('size-6');
+            } else if (noClickCount === 7) {
+                yesBtn.classList.add('size-7');
+            } else if (noClickCount >= 8) {
+                yesBtn.classList.add('size-max');
+            }
+            
+            // add little pop animation for growth
+            yesBtn.classList.add('grow-pop');
+            setTimeout(() => {
+                yesBtn.classList.remove('grow-pop');
+            }, 260);
+        }
+        
+        // Show a "try again" message in the message area
+        function showTryAgainMessage() {
+            // clear any existing final message
+            const existingSweet = messageArea.querySelector('.sweet-message');
+            if (existingSweet) {
+                existingSweet.remove();
+            }
+            
+            // pick a message based on click count for variety
+            let messageIndex = noClickCount % tryAgainMessages.length;
+            // if many clicks, cycle but also add some extra encouragement
+            let messageText = tryAgainMessages[messageIndex];
+            
+            // add extra charm after many clicks
+            if (noClickCount >= 5) {
+                messageText = "💪 " + messageText + " 💪";
+            }
+            if (noClickCount >= 10) {
+                messageText = "✨ " + messageText + " ✨";
+            }
+            
+            // create try again message element
+            const tryDiv = document.createElement('div');
+            tryDiv.className = 'try-message';
+            tryDiv.innerHTML = `<span>💭</span> ${messageText} <span>💭</span>`;
+            
+            // remove any existing try message before adding new one
+            const oldTry = messageArea.querySelector('.try-message');
+            if (oldTry) {
+                oldTry.remove();
+            }
+            
+            messageArea.appendChild(tryDiv);
+            
+            // auto-scroll into view smoothly
+            tryDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // Final sweet message when Yes is clicked
+        function showSweetFinalMessage() {
+            // clear any try messages
+            const oldTry = messageArea.querySelector('.try-message');
+            if (oldTry) oldTry.remove();
+            
+            const oldSweet = messageArea.querySelector('.sweet-message');
+            if (oldSweet) oldSweet.remove();
+            
+            // create the beautiful final message
+            const sweetDiv = document.createElement('div');
+            sweetDiv.className = 'sweet-message';
+            sweetDiv.innerHTML = `
+                <span>🎀</span>
+                <span>Yaaay ❤️ I knew it!</span>
+                <span>🌸</span>
+            `;
+            messageArea.appendChild(sweetDiv);
+            
+            // trigger show animation
+            void sweetDiv.offsetHeight;
+            sweetDiv.classList.add('show');
+            sweetDiv.classList.add('final-celebrate');
+            
+            // also add a celebratory pop to Yes button
+            yesBtn.classList.add('grow-pop');
+            setTimeout(() => {
+                yesBtn.classList.remove('grow-pop');
+            }, 500);
+            
+            // optional: add little floating hearts effect (simple)
+            createFloatingHearts();
+            
+            // disable No button after Yes is clicked (so no more changes)
+            noBtn.disabled = true;
+            noBtn.style.opacity = '0.5';
+            noBtn.style.cursor = 'default';
+            noBtn.style.pointerEvents = 'none';
+            
+            // also disable further growth on Yes
+            // but it's fine, Yes already huge and beautiful
+        }
+        
+        // create floating hearts animation for extra sweetness
+        function createFloatingHearts() {
+            const card = document.querySelector('.card');
+            for (let i = 0; i < 12; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = ['💖', '🌸', '💗', '✨', '🎀', '💕'][Math.floor(Math.random() * 6)];
+                heart.style.position = 'absolute';
+                heart.style.fontSize = (Math.random() * 20 + 16) + 'px';
+                heart.style.left = Math.random() * 90 + '%';
+                heart.style.bottom = '-20px';
+                heart.style.opacity = '0.8';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '10';
+                heart.style.transition = 'all 2.5s ease-out';
+                heart.style.animation = `floatUp ${Math.random() * 2 + 2}s ease-out forwards`;
+                card.style.position = 'relative';
+                card.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 2800);
+            }
+            
+            // add keyframes if not exists
+            if (!document.querySelector('#floatKeyframes')) {
+                const style = document.createElement('style');
+                style.id = 'floatKeyframes';
+                style.textContent = `
+                    @keyframes floatUp {
+                        0% {
+                            transform: translateY(0) rotate(0deg);
+                            opacity: 0.8;
+                        }
+                        100% {
+                            transform: translateY(-300px) rotate(15deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+        
+        // Handler for No button click
+        function onNoClick(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // increment counter
+            noClickCount++;
+            
+            // grow Yes button (make it bigger)
+            updateYesButtonSize();
+            
+            // show a "try again" message with cute words
+            showTryAgainMessage();
+            
+            // add little micro feedback (gentle vibration if supported)
+            if (window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate(20);
+            }
+            
+            // also add a tiny bounce to No button as feedback
+            noBtn.style.transform = 'scale(0.96)';
+            setTimeout(() => {
+                noBtn.style.transform = '';
+            }, 120);
+        }
+        
+        // Handler for Yes button click
+        function onYesClick(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // If final message already shown, do nothing (avoid duplicates)
+            if (yesBtn.disabled === true) return;
+            
+            // Show the sweet final message
+            showSweetFinalMessage();
+            
+            // Disable Yes button to prevent multiple messages
+            yesBtn.disabled = true;
+            yesBtn.style.cursor = 'default';
+            
+            // also add haptic feedback
+            if (window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate([30, 20, 30]);
+            }
+        }
+        
+        // Reset function (not used automatically, but ensures clean state)
+        function resetToInitial() {
+            noClickCount = 0;
+            updateYesButtonSize();
+            const tryMsg = messageArea.querySelector('.try-message');
+            if (tryMsg) tryMsg.remove();
+            const sweetMsg = messageArea.querySelector('.sweet-message');
+            if (sweetMsg) sweetMsg.remove();
+            yesBtn.disabled = false;
+            yesBtn.style.cursor = 'pointer';
+            noBtn.disabled = false;
+            noBtn.style.opacity = '1';
+            noBtn.style.pointerEvents = 'auto';
+            noBtn.style.transform = '';
+        }
+        
+        // attach event listeners
+        noBtn.addEventListener('click', onNoClick);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            onNoClick(e);
+        }, { passive: false });
+        
+        yesBtn.addEventListener('click', onYesClick);
+        yesBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            onYesClick(e);
+        }, { passive: false });
+        
+        // initial size: ensure yes button is default
+        updateYesButtonSize();
+        
+        // add a subtle initial message to make it welcoming
+        setTimeout(() => {
+            const welcomeMsg = document.createElement('div');
+            welcomeMsg.className = 'try-message';
+            welcomeMsg.innerHTML = `<span>🌸</span> click "No" if you dare... yes will grow! <span>🌸</span>`;
+            messageArea.appendChild(welcomeMsg);
+            setTimeout(() => {
+                if (welcomeMsg && welcomeMsg.parentNode) {
+                    welcomeMsg.style.opacity = '0';
+                    welcomeMsg.style.transition = 'opacity 0.5s';
+                    setTimeout(() => {
+                        if (welcomeMsg.parentNode) welcomeMsg.remove();
+                    }, 500);
+                }
+            }, 2500);
+        }, 400);
+        
+        // Prevent accidental double taps on mobile from causing weirdness
+        let yesDebounce = false;
+        const originalYesHandler = onYesClick;
+        window.onYesClick = function(e) {
+            if (yesDebounce) return;
+            yesDebounce = true;
+            originalYesHandler(e);
+            setTimeout(() => { yesDebounce = false; }, 600);
+        };
+        yesBtn.removeEventListener('click', onYesClick);
+        yesBtn.removeEventListener('touchstart', onYesClick);
+        yesBtn.addEventListener('click', (e) => {
+            if (yesDebounce) return;
+            yesDebounce = true;
+            onYesClick(e);
+            setTimeout(() => { yesDebounce = false; }, 600);
+        });
+        yesBtn.addEventListener('touchstart', (e) => {
+            if (yesDebounce) return;
+            yesDebounce = true;
+            e.preventDefault();
+            onYesClick(e);
+            setTimeout(() => { yesDebounce = false; }, 600);
+        }, { passive: false });
+        
+        // No button debounce also to avoid rapid fire
+        let noDebounce = false;
+        noBtn.removeEventListener('click', onNoClick);
+        noBtn.removeEventListener('touchstart', onNoClick);
+        noBtn.addEventListener('click', (e) => {
+            if (noDebounce) return;
+            noDebounce = true;
+            onNoClick(e);
+            setTimeout(() => { noDebounce = false; }, 250);
+        });
+        noBtn.addEventListener('touchstart', (e) => {
+            if (noDebounce) return;
+            noDebounce = true;
+            e.preventDefault();
+            onNoClick(e);
+            setTimeout(() => { noDebounce = false; }, 250);
+        }, { passive: false });
+        
+        // Add additional lovely style for disabled state
+        const style = document.createElement('style');
+        style.textContent = `
+            .btn:disabled {
+                opacity: 0.8;
+                filter: saturate(1.05);
+                cursor: default;
+            }
+            .btn-yes:disabled {
+                background: #ffd9e3;
+                transform: scale(1);
+            }
+            .btn-no:disabled {
+                background: #f0e3ea;
+                transform: scale(1);
+            }
+        `;
+        document.head.appendChild(style);
+    })();
+</script>
+</body>
+</html>
